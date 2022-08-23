@@ -12,6 +12,7 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Account
         fields = [
             "username",
+            "password",
             "first_name",
             "last_name",
             "is_seller",
@@ -20,6 +21,7 @@ class AccountSerializer(serializers.ModelSerializer):
             "is_superuser"
         ]
         read_only_fields = ["date_joined", "is_active", "is_superuser"]
+        extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data: dict) -> Account:
         user_account = Account.objects.create_user(**validated_data)

@@ -13,10 +13,13 @@ class AccountView(ListCreateAPIView):
     serializer_class = AccountSerializer
 
 class AccountDetailView(ListAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+
     def get_queryset(self):
         newest_user = self.kwargs["num"]
 
-        return self.queryset.order_by("date_joined")[0:newest_user]
+        return self.queryset.order_by("-date_joined")[0:newest_user]
 
 class LoginView(APIView):
     def post(self, request: Request) -> Response:
