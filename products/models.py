@@ -9,8 +9,4 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)
 
-    seller = models.ForeignKey(
-        "accounts.Account",
-        on_delete=models.CASCADE,
-        related_name="products"
-    )
+    seller = models.ForeignKey("accounts.Account", on_delete=models.CASCADE, related_name="products")
