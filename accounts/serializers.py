@@ -11,7 +11,7 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = [
-            "id"
+            "id",
             "username",
             "password",
             "first_name",
@@ -28,6 +28,46 @@ class AccountSerializer(serializers.ModelSerializer):
         user_account = Account.objects.create_user(**validated_data)
 
         return user_account
+
+    def update(self, instance: Account, validated_data: dict) -> Account:
+
+        for key, value in validated_data.items():
+            if key == "is_active":
+                continue
+
+            setattr(instance, key, value)
+
+        instance.save()
+
+        return instance
+
+class IsActiveSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Account
+        read_only_fields = [
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+            "is_seller",
+            "date_joined",
+            "is_superuser"
+        ]
+        exclude = ["password"]
+
+    def update(self, instance: Account, validated_data: dict) -> Account:
+
+        for key, value in validated_data.items():
+            if key is not "is_active":
+                continue
+
+            setattr(instance, key, value)
+
+        instance.save()
+
+        return instance
+
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(write_only=True)

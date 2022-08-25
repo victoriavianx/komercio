@@ -1,10 +1,13 @@
 from django.contrib.auth import authenticate
 
 from rest_framework.views import APIView, Request, Response, status
-from rest_framework.generics import ListCreateAPIView, ListAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView, UpdateAPIView
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAdminUser
 
-from .serializers import AccountSerializer, LoginSerializer
+from accounts.permissions import IsAccountOwner
+
+from .serializers import AccountSerializer, IsActiveSerializer, LoginSerializer
 
 from .models import Account
 
@@ -37,3 +40,13 @@ class LoginView(APIView):
         token, _ = Token.objects.get_or_create(user=user)
 
         return Response({"token": token.key})
+
+class AccountUpdateView(UpdateAPIView):
+    permission_classes = [IsAccountOwner]
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+
+class ManagementView(UpdateAPIView):
+    permission_classes = [IsAdminUser]
+    queryset = Account.objects.all()
+    serializer_class = IsActiveSerializer
