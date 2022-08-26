@@ -153,6 +153,6 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Komercio',
-    'DESCRIPTION': 'Komercio é uma API que simula um site de compra e venda.',
+    'DESCRIPTION': 'Komercio é um projeto que simula a API para um site de compra e venda.',
     'VERSION': '1.0.0',
 }
