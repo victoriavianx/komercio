@@ -59,7 +59,7 @@ class IsActiveSerializer(serializers.ModelSerializer):
     def update(self, instance: Account, validated_data: dict) -> Account:
 
         for key, value in validated_data.items():
-            if key is not "is_active":
+            if key != "is_active":
                 continue
 
             setattr(instance, key, value)
