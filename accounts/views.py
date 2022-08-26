@@ -25,6 +25,9 @@ class AccountDetailView(ListAPIView):
         return self.queryset.order_by("-date_joined")[0:newest_user]
 
 class LoginView(APIView):
+    queryset = Token.objects.all()
+    serializer_class = LoginSerializer
+
     def post(self, request: Request) -> Response:
         serialized_login = LoginSerializer(data=request.data)
         serialized_login.is_valid(raise_exception=True)

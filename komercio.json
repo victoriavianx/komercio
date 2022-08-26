@@ -1,0 +1,89 @@
+[
+  {
+    "model": "accounts.account",
+    "pk": "1e8a95ec-0766-43e3-8217-1a5eda709ddf",
+    "fields": {
+      "password": "pbkdf2_sha256$390000$KhVKn5EJUOCOK7zN93XlyW$hpW5u7j1ezyn1iPmBmWVRnyZ/eV8hLq/oI+rrhnDJs0=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-25T19:42:58.130Z",
+      "username": "alex",
+      "first_name": "alexandre",
+      "last_name": "alves",
+      "is_seller": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.account",
+    "pk": "358fba1e-a0f1-469a-8cfb-87dc44e4cbe8",
+    "fields": {
+      "password": "!KF2tojymhNLjhIPj2gz0zEv3V4Xbx5tFzUFfXsXP",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-25T18:42:05.943Z",
+      "username": "victoria",
+      "first_name": "victoria",
+      "last_name": "viana",
+      "is_seller": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.account",
+    "pk": "415fa4a0-4a4f-4f37-b8fe-1162d09314eb",
+    "fields": {
+      "password": "pbkdf2_sha256$390000$d3FatOASA6h5t0hGlyS1iR$2rJrwC0pyYaGTK1kQ87h69AnMEJU7xlnOy3N5F4loGA=",
+      "last_login": null,
+      "is_superuser": true,
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2022-08-25T20:03:56.813Z",
+      "username": "vict",
+      "first_name": "Victoria",
+      "last_name": "Garcia",
+      "is_seller": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.account",
+    "pk": "7a7790bb-7132-460a-8444-52d9b244d434",
+    "fields": {
+      "password": "pbkdf2_sha256$390000$MZR6paEIELMUIHqkrdFpD0$A6THEBbXDoMNnuAW6PyU1FKA0zMwVcCjtm9z6aQpFXc=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "",
+      "is_staff": false,
+      "is_active": false,
+      "date_joined": "2022-08-25T19:43:29.290Z",
+      "username": "victo",
+      "first_name": "victoria",
+      "last_name": "viana",
+      "is_seller": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "66ea3248-754f-4cd8-97da-1cd50b0c92cb",
+    "fields": {
+      "description": "Smartband XYZ 3.0",
+      "price": "100.99",
+      "quantity": 15,
+      "is_active": true,
+      "seller": "1e8a95ec-0766-43e3-8217-1a5eda709ddf"
+    }
+  }
+]
