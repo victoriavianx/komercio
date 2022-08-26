@@ -1,6 +1,6 @@
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase, APIClient
-from rest_framework.views import status
+from rest_framework.views import status, Response
 
 from django.core.exceptions import ValidationError
 
@@ -59,7 +59,7 @@ class ProductViewTest(APITestCase):
             "seller": cls.seller
         }
 
-        product = Product.objects.create(**cls.product_data)
+        [Product.objects.create(**cls.product_data) for _ in range(5)]
 
     def test_only_a_seller_user_can_add_product(self):
         print("test_only_a_seller_user_can_add_product")
@@ -72,7 +72,6 @@ class ProductViewTest(APITestCase):
 
         self.assertEqual(expected_status_code, result_status_code)
 
-
     def test_common_user_cannot_add_product(self):
         print("test_common_user_cannot_add_product")
         
@@ -84,6 +83,18 @@ class ProductViewTest(APITestCase):
 
         self.assertEqual(expected_status_code, result_status_code)
 
+    def test_return_response_of_registered_product(self):
+        print("test_return_response_of_registered_product")
+
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.seller_token.key)
+        response_seller = self.client.post(self.base_url, data=self.product_data)
+        data = response_seller.json()
+
+        required_fields = ["id", "description", "price", "quantity", "is_active", "seller"]
+
+        for field in required_fields:
+            self.assertIn(field, data.keys())
+
     def test_retrieve_all_products(self):
         print("test_retrieve_all_products")
 
@@ -93,6 +104,17 @@ class ProductViewTest(APITestCase):
         result_status_code = response.status_code
 
         self.assertEqual(expected_status_code, result_status_code)
+
+    def test_specific_return_for_retrieve_of_products(self):
+        print("test_specific_return_for_retrieve_of_products")
+
+        response = self.client.get(self.base_url)
+        data = response.json()
+
+        required_fields = ["id", "description", "price", "quantity", "is_active", "seller"]
+
+        for field in required_fields:
+            self.assertIn(field, data["results"][0].keys())
 
     def test_missing_fields(self):
         print("test_missing_fields")
@@ -104,11 +126,6 @@ class ProductViewTest(APITestCase):
         result_status_code = response.status_code
 
         self.assertEqual(expected_status_code, result_status_code)
-
-        required_fields = ["description", "price", "quantity"]
-
-        for field in required_fields:
-            self.assertIn(field, response.data.keys())
 
     def test_quantity_cannot_be_negative(self):
         print("test_quantity_cannot_be_negative")
@@ -128,7 +145,8 @@ class ProductViewTest(APITestCase):
         result_status_code = response.status_code
 
         self.assertEqual(expected_status_code, result_status_code)
- 
+
+##########################################
 class ProductDetailViewTest(APITestCase):
     @classmethod
     def setUpTestData(cls) -> None:
