@@ -8,7 +8,7 @@ A API foi desenvolvida com Django Rest Framework, conectada com banco de dados P
 
 ## 📓 Documentação da API
 
-→ <a href="https://komercio-api.herokuapp.com/api/docs/">Link da Documentação</a>
+→ <a target="_blank" href="https://komercio-api.herokuapp.com/api/docs/">Link da Documentação</a>
 
 ## 📝 Features
 
